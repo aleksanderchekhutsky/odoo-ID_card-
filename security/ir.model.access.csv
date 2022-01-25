@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_passport_id,access.passport.id,model_passport_id,,1,1,1,1
+access_passport_many,access_passport_many,model_passport_many,base.group_user,1,1,1,1
+access_hobie_many,access_hobie_many,model_hobie_many,base.group_user,1,1,1,1
+
+
+

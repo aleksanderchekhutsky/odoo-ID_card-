@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <record id="view_passport_kandan" model="ir.ui.view">
+            <field name="name">passport.id.kanban</field>
+            <field name="model">passport.id</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="lastname"/>
+                    <field name="cit"/>
+                    <field name="personalnum"/>
+                    <field name="gender"/>
+                    <field name="birthdata"/>
+                    <field name="dateiss"/>
+                    <field name="placebirth"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kandan_details">
+                                    <ul>
+                                        <li>
+                                            Name: <field name="name"/>
+                                        </li>
+                                        <li>
+                                            Lastname: <field name="lastname"/>
+                                        </li>
+                                        <li>
+                                            CIT: <field name="cit"/>
+                                        </li>
+                                        <li>
+                                            Personal N: <field name="personalnum"/>
+                                        </li>
+                                        <li>
+                                            Gender: <field name="gender"/>
+                                        </li>
+                                        <li>
+                                            Date of birth: <field name="birthdata"/>
+                                        </li>
+
+
+
+                                    </ul>
+
+                                </div>
+
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+    <record id="view_passport_tree" model="ir.ui.view">
+        <field name="name">passport.id.form</field>
+        <field name="model">passport.id</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="lastname"/>
+                <field name="cit"/>
+                <field name="personalnum"/>
+                <field name="gender"/>
+                <field name="birthdata"/>
+                <field name="dateiss"/>
+                <field name="placebirth"/>
+            </tree>
+        </field>
+
+
+    </record>
+    <record id="view_passport_form" model="ir.ui.view">
+        <field name="name">passport.id.form</field>
+        <field name="model">passport.id</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="lastname"/>
+                            <field name="gender"/>
+                            <field name="dateiss"/>
+                        </group>
+                        <group>
+                            <field name="cit"/>
+                            <field name="personalnum"/>
+                            <field name="birthdata"/>
+                            <field name="placebirth"/>
+                            <field name="other" />
+                            <field name="hobbies" widget="many2many_tags"/>
+
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+
+
+    </record>
+
+
+    <record id="passport_action" model="ir.actions.act_window">
+        <field name="name">Passport</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">passport.id</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create new Data!
+            </p>
+        </field>
+
+    </record>
+
+
+    <menuitem id="passport_root"
+              name="Passport"
+              sequence="10"/>
+    <menuitem id="passport_user_root"
+              name="Users"
+              parent="passport_root"
+              sequence="10"/>
+    <menuitem id="passport_user"
+              name="Users"
+              parent="passport_user_root"
+              action="passport_action"
+              sequence="10"/>
+
+
+
+
+
+</odoo>

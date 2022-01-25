@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_passport_pdf" model="ir.actions.report">
+       <field name="name">Passport PDF</field>
+       <field name="model">passport.id</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">passport.report_passport_pdf</field>
+       <field name="report_file">passport.report_passport_pdf</field>
+       <field name="binding_model_id" ref="model_passport_id"/>
+    </record>
+</odoo>
