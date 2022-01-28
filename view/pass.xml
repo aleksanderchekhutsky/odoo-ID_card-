@@ -7,13 +7,13 @@
                 <kanban>
                     <field name="id"/>
                     <field name="name"/>
-                    <field name="lastname"/>
+                    <field name="last_name"/>
                     <field name="cit"/>
-                    <field name="personalnum"/>
+                    <field name="personal_num"/>
                     <field name="gender"/>
-                    <field name="birthdata"/>
-                    <field name="dateiss"/>
-                    <field name="placebirth"/>
+                    <field name="birth_of_data"/>
+                    <field name="date_of_iss"/>
+                    <field name="place_of_birth"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_global_click">
@@ -23,27 +23,22 @@
                                             Name: <field name="name"/>
                                         </li>
                                         <li>
-                                            Lastname: <field name="lastname"/>
+                                            Lastname: <field name="last_name"/>
                                         </li>
                                         <li>
                                             CIT: <field name="cit"/>
                                         </li>
                                         <li>
-                                            Personal N: <field name="personalnum"/>
+                                            Personal N: <field name="personal_num"/>
                                         </li>
                                         <li>
                                             Gender: <field name="gender"/>
                                         </li>
                                         <li>
-                                            Date of birth: <field name="birthdata"/>
+                                            Date of birth: <field name="birth_of_data"/>
                                         </li>
-
-
-
                                     </ul>
-
                                 </div>
-
                             </div>
                         </t>
                     </templates>
@@ -51,25 +46,23 @@
             </field>
         </record>
 
-
     <record id="view_passport_tree" model="ir.ui.view">
         <field name="name">passport.id.form</field>
         <field name="model">passport.id</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-                <field name="lastname"/>
+                <field name="last_name"/>
                 <field name="cit"/>
-                <field name="personalnum"/>
+                <field name="personal_num"/>
                 <field name="gender"/>
-                <field name="birthdata"/>
-                <field name="dateiss"/>
-                <field name="placebirth"/>
+                <field name="birth_of_data"/>
+                <field name="date_of_iss"/>
+                <field name="place_of_birth"/>
             </tree>
         </field>
-
-
     </record>
+
     <record id="view_passport_form" model="ir.ui.view">
         <field name="name">passport.id.form</field>
         <field name="model">passport.id</field>
@@ -80,27 +73,24 @@
                     <group>
                         <group>
                             <field name="name"/>
-                            <field name="lastname"/>
+                            <field name="last_name"/>
                             <field name="gender"/>
-                            <field name="dateiss"/>
+                            <field name="date_of_iss"/>
                         </group>
+
                         <group>
                             <field name="cit"/>
-                            <field name="personalnum"/>
-                            <field name="birthdata"/>
-                            <field name="placebirth"/>
+                            <field name="personal_num"/>
+                            <field name="birth_of_data"/>
+                            <field name="place_of_birth"/>
                             <field name="other" />
                             <field name="hobbies" widget="many2many_tags"/>
-
                         </group>
                     </group>
                 </sheet>
             </form>
         </field>
-
-
     </record>
-
 
     <record id="passport_action" model="ir.actions.act_window">
         <field name="name">Passport</field>
@@ -112,9 +102,7 @@
                 Create new Data!
             </p>
         </field>
-
     </record>
-
 
     <menuitem id="passport_root"
               name="Passport"
@@ -128,9 +116,4 @@
               parent="passport_user_root"
               action="passport_action"
               sequence="10"/>
-
-
-
-
-
 </odoo>

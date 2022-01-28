@@ -1,65 +1,60 @@
 from odoo import  fields, models, api
 from odoo.exceptions import UserError, RedirectWarning, ValidationError
+
+
 class PassportId(models.Model):
-
-
-    _name ='passport.id'
+    _name = 'passport.id'
     _description = 'Passport'
 
-
-    name =fields.Char(string="Name")
-    lastname = fields.Char(string="Lastname")
-    cit = fields.Char(string="CIT")
-    personalnum = fields.Float(string="Personal N", size=13,digits=(13,0))
+    name = fields.Char(string="Name", required=True)
+    last_name = fields.Char(string="Lastname", required=True)
+    cit = fields.Char(string="CIT", required=True)
+    personal_num = fields.Char(string="Personal N", size=11, digits=(11,0), required=True)
     gender = fields.Selection([
         ('male', 'Male'),
         ('female', 'Female')
     ], required=True, default='male')
-    birthdata = fields.Date(string="Date of birth")
-    placebirth = fields.Char(strin="Place of birth")
-    dateiss= fields.Date(string="Date of issue")
-    image =fields.Binary(string="Image")
+    birth_of_data = fields.Date(string="Date of birth", required=True)
+    place_of_birth = fields.Char(strin="Place of birth", required=True)
+    date_of_iss = fields.Date(string="Date of issue", required=True)
+    image = fields.Binary(string="Image")
     other = fields.Many2one("passport.many", "deppartment")
-    hobbies = fields.Many2many("hobie.many", string="hobie")
+    hobbies = fields.Many2many("passport.hobie", string="hobie")
 
-    #personal number validator
-    @api.constrains('personalnum')
-    def check_pers_num(self):
-        if len(str(self.personalnum)) != 13:
-            raise ValidationError(('personal  number length is not 11 '))
-        else:
-            for rec in self:
-                nums = self.env['passport.id'].search([('personalnum','=',rec.personalnum),('id','!=',rec.id)])
-                if nums:
-                    raise ValidationError(("Personal number is used"))
+    _sql_constraints = [
+        ('personal_number_unique',
+         'unique(personal_num)',
+         'Personal number already exists!')
+    ]
 
-    @api.constrains('birthdata')
-
-    def check_name(self):
+    @api.constrains('personal_num')
+    def personal_num_check(self):
+        """Personal Number Validation"""
         for i in self:
-            if i.birthdata ==0:
-                raise ValidationError(("Enter age"))
-    @api.constrains('name', 'lastname')
-    def check_nam_lastnam(self):
-        if self.name == False or self.lastname ==False:
-            raise ValidationError(("Name or Lastname Error"))
-    
+            if len(i.personal_num) != 11:
+                raise ValidationError('Personal  Number length is not 11 ')
+            if str(i.personal_num).isdigit()!= True:
+                raise ValidationError('Personal number is not corect!')
 
-class HobieMany(models.Model):
-    _name = "hobie.many"
-    _description = "hobie many"
+    @api.constrains('name', 'last_name')
+    def check_nam_lastnam(self):
+        """Name and Lastname validation"""
+        for i in self:
+            if self.name == self.last_name:
+                raise ValidationError(("Name or Lastname Error"))
+
+
+class PassportHobie(models.Model):
+    _name = "passport.hobie"
+    _description = "passport hobie"
     _rec_name = "hobi_list"
+
     hobi_list = fields.Char('Hobbie')
+
 
 class PassportMany(models.Model):
     _name = "passport.many"
     _description = "passport many"
     _rec_name = 'other_list'
 
-
     other_list = fields.Char('other')
-
-
-
-
-
