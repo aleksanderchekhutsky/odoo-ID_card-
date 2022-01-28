@@ -40,7 +40,7 @@ class PassportId(models.Model):
     def check_nam_lastnam(self):
         """Name and Lastname validation"""
         for i in self:
-            if self.name == self.last_name:
+            if i.name == i.last_name:
                 raise ValidationError(("Name or Lastname Error"))
 
 
