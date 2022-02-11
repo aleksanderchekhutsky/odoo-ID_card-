@@ -4,6 +4,7 @@
             <field name="name">passport.id.kanban</field>
             <field name="model">passport.id</field>
             <field name="arch" type="xml">
+                <button name = "department" string="dep" class="btn-primary"/>
                 <kanban>
                     <field name="id"/>
                     <field name="name"/>
@@ -59,6 +60,7 @@
                 <field name="birth_of_data"/>
                 <field name="date_of_iss"/>
                 <field name="place_of_birth"/>
+                <field name="other"/>
             </tree>
         </field>
     </record>
@@ -104,16 +106,61 @@
         </field>
     </record>
 
+
+    <record id="passport_many_tree" model="ir.ui.view">
+        <field name="name">passport.many.tree</field>
+        <field name="model">passport.many</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="other_list"/>
+                <field name="employe_list"/>
+                <field name="manager"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="department_form_view">
+        <field name="name">department.form.view</field>
+        <field name="model">passport.many</field>
+        <field name="arch" type="xml">
+            <form string="Passport department form">
+                <sheet>
+                    <group>
+                        <b><p>Department:</p></b><field name="other_list" style="width:90%"/>
+                        <field name="employe_list" style="width:90%"/>
+                        <group>
+                            <field name="manager" domain="[('id', 'in' , employe_list)]"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="department_action" model="ir.actions.act_window">
+        <field name="name">Department</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">passport.many</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create new department!
+            </p>
+        </field>
+    </record>
+
     <menuitem id="passport_root"
               name="Passport"
-              sequence="10"/>
+              sequence="1"/>
     <menuitem id="passport_user_root"
-              name="Users"
+              name="Passport"
               parent="passport_root"
-              sequence="10"/>
-    <menuitem id="passport_user"
-              name="Users"
-              parent="passport_user_root"
               action="passport_action"
-              sequence="10"/>
+              sequence="1"/>
+    <menuitem id="passport_user"
+              name="Department"
+              parent="passport_root"
+              action="department_action"
+              sequence="2"/>
 </odoo>

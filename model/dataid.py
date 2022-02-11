@@ -18,7 +18,7 @@ class PassportId(models.Model):
     place_of_birth = fields.Char(strin="Place of birth", required=True)
     date_of_iss = fields.Date(string="Date of issue", required=True)
     image = fields.Binary(string="Image")
-    other = fields.Many2one("passport.many", "deppartment")
+    other = fields.Many2one("passport.many", string="Department", reqired=True)
     hobbies = fields.Many2many("passport.hobie", string="hobie")
 
     _sql_constraints = [
@@ -33,7 +33,7 @@ class PassportId(models.Model):
         for i in self:
             if len(i.personal_num) != 11:
                 raise ValidationError('Personal  Number length is not 11 ')
-            if str(i.personal_num).isdigit()!= True:
+            if not str(i.personal_num).isdigit():
                 raise ValidationError('Personal number is not corect!')
 
     @api.constrains('name', 'last_name')
@@ -42,6 +42,30 @@ class PassportId(models.Model):
         for i in self:
             if i.name == i.last_name:
                 raise ValidationError(("Name or Lastname Error"))
+            if not i.name.isalpha():
+                raise ValidationError(("Name Error!"))
+            if not i.last_name.isalpha():
+                raise ValidationError(("Lastname Error!"))
+            else:
+                if i.name[0].islower():
+                    i.name = i.name.capitalize()
+                if i.last_name[0].islower():
+                    i.last_name = i.last_name.capitalize()
+
+
+    @api.constrains('cit','place_of_birth')
+    def check_cit_and_place(self):
+        """ Cit and Place Of birth validation"""
+        for i in self:
+            if not i.cit.isalpha():
+                raise ValidationError("CIT or Place Error! ")
+            if not i.place_of_birth.isalpha():
+                raise ValidationError("Place of birth Error!")
+            else:
+                if i.cit.islower():
+                    i.cit = i.cit.upper()
+                if i.place_of_birth[0].islower():
+                    i.place_of_birth = i.place_of_birth.capitalize()
 
 
 class PassportHobie(models.Model):
@@ -50,6 +74,7 @@ class PassportHobie(models.Model):
     _rec_name = "hobi_list"
 
     hobi_list = fields.Char('Hobbie')
+    # other_one_to_many = fields.One2many('other')
 
 
 class PassportMany(models.Model):
@@ -57,4 +82,8 @@ class PassportMany(models.Model):
     _description = "passport many"
     _rec_name = 'other_list'
 
-    other_list = fields.Char('other')
+    other_list = fields.Char(string='Department', size=20, ruired=True)
+    employe_list =fields.One2many('passport.id', 'other', string='Employee')
+    manager = fields.Many2one('passport.id', string='Manager')
+    # other_one_to_many = fields.Char('other_one')
+
