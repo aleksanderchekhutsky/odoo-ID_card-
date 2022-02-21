@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-     <record id="view_passport_kandan" model="ir.ui.view">
-            <field name="name">passport.id.kanban</field>
-            <field name="model">passport.id</field>
-            <field name="arch" type="xml">
-                <button name = "department" string="dep" class="btn-primary"/>
-                <kanban>
-                    <field name="id"/>
-                    <field name="name"/>
-                    <field name="last_name"/>
-                    <field name="cit"/>
-                    <field name="personal_num"/>
-                    <field name="gender"/>
-                    <field name="birth_of_data"/>
-                    <field name="date_of_iss"/>
-                    <field name="place_of_birth"/>
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div t-attf-class="oe_kanban_global_click">
-                                <div class="oe_kandan_details">
-                                    <ul>
-                                        <li>
-                                            Name: <field name="name"/>
-                                        </li>
-                                        <li>
-                                            Lastname: <field name="last_name"/>
-                                        </li>
-                                        <li>
-                                            CIT: <field name="cit"/>
-                                        </li>
-                                        <li>
-                                            Personal N: <field name="personal_num"/>
-                                        </li>
-                                        <li>
-                                            Gender: <field name="gender"/>
-                                        </li>
-                                        <li>
-                                            Date of birth: <field name="birth_of_data"/>
-                                        </li>
-                                    </ul>
-                                </div>
+
+    <record model="ir.ui.view" id="view_passport_kanban">
+        <field name="name">view.passport.kanban</field>
+        <field name="model">passport.id</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="name"/>
+                <field name="last_name"/>
+                <field name="cit"/>
+                <field name="personal_num"/>
+                <field name="gender"/>
+                <field name="birth_of_data"/>
+                <field name="date_of_iss"/>
+                <field name="place_of_birth"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>
+                                        Name: <field name="name"/>
+                                    </li>
+                                    <li>
+                                        Lastname: <field name="last_name"/>
+                                    </li>
+                                    <li>
+                                        CIT: <field name="cit"/>
+                                    </li>
+                                    <li>
+                                        Personal N: <field name="personal_num"/>
+                                    </li>
+                                    <li>
+                                        Gender: <field name="gender"/>
+                                    </li>
+                                    <li>
+                                        Date of birth: <field name="birth_of_data"/>
+                                    </li>
+                                </ul>
                             </div>
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
-        </record>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
 
     <record id="view_passport_tree" model="ir.ui.view">
         <field name="name">passport.id.form</field>
