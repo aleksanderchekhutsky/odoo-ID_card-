@@ -84,5 +84,4 @@ class PassportMany(models.Model):
     passport_other = fields.Char(string='Department', size=20, required =True)
     passport_employe =fields.One2many('passport.id', 'other', string='Employee')
     passport_manager = fields.Many2one('passport.id', string='Manager')
-    # other_one_to_many = fields.Char('other_one')
 
