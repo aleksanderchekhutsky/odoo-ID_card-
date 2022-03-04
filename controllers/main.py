@@ -22,7 +22,7 @@ class Passport(http.Controller):
                 'date_of_birth': i.birth_of_data,
                 'place_of_birth': i.place_of_birth,
                 'date_of_issue' : i.date_of_iss,
-                'department':i.other.other_list,
+                'department':i.other.passport_other,
                 'hobbies': i.hobbies
             }
             ids.append(vals)

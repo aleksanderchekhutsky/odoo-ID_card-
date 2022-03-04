@@ -79,7 +79,6 @@
                             <field name="gender"/>
                             <field name="date_of_iss"/>
                         </group>
-
                         <group>
                             <field name="cit"/>
                             <field name="personal_num"/>
@@ -106,15 +105,14 @@
         </field>
     </record>
 
-
     <record id="passport_many_tree" model="ir.ui.view">
         <field name="name">passport.many.tree</field>
         <field name="model">passport.many</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="other_list"/>
-                <field name="employe_list"/>
-                <field name="manager"/>
+                <field name="passport_other"/>
+                <field name="passport_employe"/>
+                <field name="passport_manager"/>
             </tree>
         </field>
     </record>
@@ -127,10 +125,10 @@
             <form string="Passport department form">
                 <sheet>
                     <group>
-                        <b><p>Department:</p></b><field name="other_list" style="width:90%"/>
-                        <field name="employe_list" style="width:90%"/>
+                        <b><p>Department:</p></b><field name="passport_other" style="width:90%"/>
+                        <field name="passport_employe" style="width:90%"/>
                         <group>
-                            <field name="manager" domain="[('id', 'in' , employe_list)]"/>
+                            <field name="passport_manager" domain="[('id', 'in' , passport_employe)]"/>
                         </group>
                     </group>
                 </sheet>
@@ -163,4 +161,5 @@
               parent="passport_root"
               action="department_action"
               sequence="2"/>
+
 </odoo>

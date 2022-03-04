@@ -71,19 +71,18 @@ class PassportId(models.Model):
 class PassportHobie(models.Model):
     _name = "passport.hobie"
     _description = "passport hobie"
-    _rec_name = "hobi_list"
+    _rec_name = "passport_hobi"
 
-    hobi_list = fields.Char('Hobbie')
-    # other_one_to_many = fields.One2many('other')
+    passport_hobi = fields.Char('Hobbie')
 
 
 class PassportMany(models.Model):
     _name = "passport.many"
     _description = "passport many"
-    _rec_name = 'other_list'
+    _rec_name = 'passport_other'
 
-    other_list = fields.Char(string='Department', size=20, ruired=True)
-    employe_list =fields.One2many('passport.id', 'other', string='Employee')
-    manager = fields.Many2one('passport.id', string='Manager')
+    passport_other = fields.Char(string='Department', size=20, required =True)
+    passport_employe =fields.One2many('passport.id', 'other', string='Employee')
+    passport_manager = fields.Many2one('passport.id', string='Manager')
     # other_one_to_many = fields.Char('other_one')
 

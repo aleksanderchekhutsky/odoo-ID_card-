@@ -9,4 +9,5 @@
        <field name="report_file">passport.report_passport_pdf</field>
        <field name="binding_model_id" ref="model_passport_id"/>
     </record>
+
 </odoo>
